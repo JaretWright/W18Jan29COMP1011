@@ -20,7 +20,7 @@ public class LaunchPhone extends Application {
         
         Scene scene = new Scene(root);
        
-        stage.setTitle("New Car");
+        stage.setTitle("Create Phone");
         stage.setScene(scene);
         stage.show();
     }

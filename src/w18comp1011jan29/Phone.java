@@ -1,5 +1,8 @@
 package w18comp1011jan29;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  * @author JWright
@@ -27,7 +30,11 @@ public class Phone {
     }
 
     public void setBrand(String brand) {
-        this.brand = brand;
+        if (getManufacturers().contains(brand))
+            this.brand = brand;
+        else
+            throw new IllegalArgumentException("Valid brands are: "+ 
+                                                    getManufacturers());
     }
 
     public String getModel() {
@@ -46,4 +53,12 @@ public class Phone {
         this.os = os;
     }
     
+    /**
+     * This method will return a List of a valid phone manufacturers
+     */
+    public static List<String> getManufacturers()
+    {
+      String[] manufacturers = {"Apple","Samsung","Sony","Nokia","HTC","Blackberry"};
+      return Arrays.asList(manufacturers);
+    }
 }

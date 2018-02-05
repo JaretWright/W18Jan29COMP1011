@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="w18comp1011jan29.PhoneViewController">
+    <stylesheets>
+        <URL value="@phoneview.css" />
+    </stylesheets>
+   <children>
+      <VBox alignment="CENTER" layoutX="158.0" layoutY="27.0" prefHeight="400.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Super Awesome Phone Scene" />
+            <GridPane maxWidth="300.0" vgap="10.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.0" minWidth="10.0" prefWidth="89.33332824707031" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="473.33333587646484" minWidth="10.0" prefWidth="210.6666717529297" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Resolution" />
+                  <Label text="Brand" GridPane.rowIndex="1" />
+                  <Label text="Model" GridPane.rowIndex="2" />
+                  <Label text="OS" GridPane.rowIndex="3" />
+                  <TextField fx:id="resTextField" promptText="Resolution" GridPane.columnIndex="1" />
+                  <TextField fx:id="brandTextField" promptText="Brand" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="modelTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="osTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="103.0" prefWidth="560.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#createPhoneButtonPushed" text="Create Phone" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

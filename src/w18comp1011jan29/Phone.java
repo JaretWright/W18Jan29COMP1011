@@ -8,21 +8,35 @@ import java.util.List;
  * @author JWright
  */
 public class Phone {
-    private String res, brand, model, os;
+    private String brand, model, os;
+    private double res;
 
-    public Phone(String res, String brand, String model, String os) {
-        this.res = res;
-        this.brand = brand;
-        this.model = model;
-        this.os = os;
+    public Phone(double res, String brand, String model, String os) {
+        setRes(res);
+        setBrand(brand);
+        setModel(model);
+        setOs(os);
     }
 
-    public String getRes() {
+    public double getRes() {
         return res;
     }
 
-    public void setRes(String res) {
-        this.res = res;
+    public void setRes(double res) {
+        if (res<0 || res>45)
+            throw new IllegalArgumentException("Resolution should be 0-45");
+        else
+            this.res = res;
+    }
+    
+    /**
+     * This overrides the toString() method from the object class
+     * and will display a phone as "make model"
+     * @return 
+     */
+    @Override
+    public String toString(){
+        return this.brand + " " + this.model;
     }
 
     public String getBrand() {
@@ -42,7 +56,10 @@ public class Phone {
     }
 
     public void setModel(String model) {
-        this.model = model;
+        if (!model.isEmpty())
+            this.model = model;
+        else
+            throw new IllegalArgumentException("Model cannot be empty");
     }
 
     public String getOs() {
@@ -50,7 +67,10 @@ public class Phone {
     }
 
     public void setOs(String os) {
-        this.os = os;
+        if (!os.isEmpty())
+            this.os = os;
+        else
+           throw new IllegalArgumentException("OS cannot be empty");
     }
     
     /**

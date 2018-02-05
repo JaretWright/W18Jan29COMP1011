@@ -55,6 +55,7 @@
                   <Button mnemonicParsing="false" onAction="#createPhoneButtonPushed" text="Create Phone" />
                </children>
             </HBox>
+            <Label fx:id="errorMsg" text="Label" />
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

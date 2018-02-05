@@ -17,21 +17,29 @@ import javafx.scene.control.TextField;
  */
 public class PhoneViewController implements Initializable {
 
-    @FXML    private TextField resTextField;
     @FXML    private ComboBox<String> brandComboBox;
     @FXML    private TextField modelTextField;
     @FXML    private TextField osTextField;
     @FXML    private Slider resolutionSlider;
     @FXML    private Label resolutionLabel;
+    @FXML    private Label errorMsg;
     
     public void createPhoneButtonPushed()
     {
-        Phone newPhone = new Phone(this.resTextField.getText(), 
-                                    this.brandComboBox.getValue(), 
-                                    this.modelTextField.getText(), 
-                                    this.osTextField.getText());
-                                    
-        System.out.println(newPhone.toString());
+        try{
+            Phone newPhone = new Phone(resolutionSlider.getValue(), 
+                                        this.brandComboBox.getValue(), 
+                                        this.modelTextField.getText(), 
+                                        this.osTextField.getText());
+
+            System.out.println(newPhone.toString());
+            errorMsg.setText("");
+        }
+        catch (IllegalArgumentException e)
+        {
+            errorMsg.setText(e.getMessage());
+            
+        }
     }
 
     /**
@@ -50,6 +58,8 @@ public class PhoneViewController implements Initializable {
         resolutionSlider.setValue(12); //set the default value
         resolutionLabel.setText(Double.toString(resolutionSlider.getValue())
                                                 +" MP");
+        
+        errorMsg.setText("");
     }
     
     /**

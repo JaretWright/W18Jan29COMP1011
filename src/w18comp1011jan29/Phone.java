@@ -10,12 +10,26 @@ import java.util.List;
 public class Phone {
     private String brand, model, os;
     private double res;
+    private int memory;
 
-    public Phone(double res, String brand, String model, String os) {
+    public Phone(double res, String brand, String model, String os, int memory) {
         setRes(res);
         setBrand(brand);
         setModel(model);
         setOs(os);
+        setMemory(memory);
+    }
+
+    public int getMemory()
+    {
+        return memory;
+    }
+
+    public void setMemory(int memory)
+    {
+        if (memory > 0)
+            this.memory = memory;
+        else throw new IllegalArgumentException("Memory must be greater than 0");
     }
 
     public double getRes() {

@@ -21,6 +21,7 @@ public class PhoneViewController implements Initializable {
 
     @FXML    private ComboBox<String> brandComboBox;
     @FXML    private TextField modelTextField;
+    @FXML    private TextField memoryTextField;
     @FXML    private Slider resolutionSlider;
     @FXML    private Label resolutionLabel;
     @FXML    private Label errorMsg;
@@ -51,7 +52,8 @@ public class PhoneViewController implements Initializable {
             Phone newPhone = new Phone(resolutionSlider.getValue(), 
                                         this.brandComboBox.getValue(), 
                                         this.modelTextField.getText(), 
-                                        os);
+                                        os,
+                                        Integer.parseInt(memoryTextField.getText()));
 
             System.out.println(newPhone.toString());
             errorMsg.setText("");

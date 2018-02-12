@@ -6,8 +6,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 
 
 /**
@@ -19,18 +21,37 @@ public class PhoneViewController implements Initializable {
 
     @FXML    private ComboBox<String> brandComboBox;
     @FXML    private TextField modelTextField;
-    @FXML    private TextField osTextField;
     @FXML    private Slider resolutionSlider;
     @FXML    private Label resolutionLabel;
     @FXML    private Label errorMsg;
+    @FXML    private RadioButton androidRadioButton;
+    @FXML    private RadioButton iOSRadioButton;
+    @FXML    private RadioButton windowsRadioButton;
+    @FXML    private RadioButton blackberryRadioButton;
+             private ToggleGroup osToggleGroup;
     
+    public String getOSFromRadioButtons()
+    {
+        if (osToggleGroup.getSelectedToggle().equals(iOSRadioButton))
+            return "iOS";
+        
+        if (osToggleGroup.getSelectedToggle().equals(androidRadioButton))
+            return "Android";
+        
+        if (osToggleGroup.getSelectedToggle().equals(windowsRadioButton))
+            return "Windows";
+        
+        else return "Blackberry";
+        
+    }
     public void createPhoneButtonPushed()
     {
+        String os = getOSFromRadioButtons();
         try{
             Phone newPhone = new Phone(resolutionSlider.getValue(), 
                                         this.brandComboBox.getValue(), 
                                         this.modelTextField.getText(), 
-                                        this.osTextField.getText());
+                                        os);
 
             System.out.println(newPhone.toString());
             errorMsg.setText("");
@@ -60,6 +81,16 @@ public class PhoneViewController implements Initializable {
                                                 +" MP");
         
         errorMsg.setText("");
+        
+        //configure the RadioButtons and add a ToggleGroup to ensure
+        //only 1 RadioButton at a time is selected
+        osToggleGroup = new ToggleGroup();
+        iOSRadioButton.setToggleGroup(osToggleGroup);
+        androidRadioButton.setToggleGroup(osToggleGroup);
+        windowsRadioButton.setToggleGroup(osToggleGroup);
+        blackberryRadioButton.setToggleGroup(osToggleGroup);
+        androidRadioButton.setSelected(true);
+        
     }
     
     /**

@@ -1,5 +1,6 @@
 package w18comp1011jan29;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,16 +9,32 @@ import java.util.List;
  * @author JWright
  */
 public class Phone {
-    private String brand, model, os;
+    private String brand, model, os, imageLocation;
     private double res;
     private int memory;
 
-    public Phone(double res, String brand, String model, String os, int memory) {
+    public Phone(double res, String brand, String model, String os, int memory, String imgLocation) {
         setRes(res);
         setBrand(brand);
         setModel(model);
         setOs(os);
         setMemory(memory);
+        setImageLocation(imgLocation);
+    }
+
+    public String getImageLocation()
+    {
+        return imageLocation;
+    }
+
+    public void setImageLocation(String imageLocation)
+    {
+        File img = new File(imageLocation);
+        
+        if (img.canRead())
+            this.imageLocation = imageLocation;
+        else
+            throw new IllegalArgumentException("Image location is invalid");
     }
 
     public int getMemory()

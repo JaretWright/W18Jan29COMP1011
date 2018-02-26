@@ -1,15 +1,24 @@
 package w18comp1011jan29;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
 /**
@@ -21,7 +30,6 @@ public class PhoneViewController implements Initializable {
 
     @FXML    private ComboBox<String> brandComboBox;
     @FXML    private TextField modelTextField;
-    @FXML    private TextField memoryTextField;
     @FXML    private Slider resolutionSlider;
     @FXML    private Label resolutionLabel;
     @FXML    private Label errorMsg;
@@ -29,7 +37,10 @@ public class PhoneViewController implements Initializable {
     @FXML    private RadioButton iOSRadioButton;
     @FXML    private RadioButton windowsRadioButton;
     @FXML    private RadioButton blackberryRadioButton;
+    @FXML    private Spinner<Integer> memorySpinner;
+    @FXML    private ImageView imageView;
              private ToggleGroup osToggleGroup;
+             private String imageLocation;
     
     public String getOSFromRadioButtons()
     {
@@ -45,6 +56,8 @@ public class PhoneViewController implements Initializable {
         else return "Blackberry";
         
     }
+    
+    
     public void createPhoneButtonPushed()
     {
         String os = getOSFromRadioButtons();
@@ -53,7 +66,8 @@ public class PhoneViewController implements Initializable {
                                         this.brandComboBox.getValue(), 
                                         this.modelTextField.getText(), 
                                         os,
-                                        Integer.parseInt(memoryTextField.getText()));
+                                        memorySpinner.getValue(),
+                                        this.imageLocation);
 
             System.out.println(newPhone.toString());
             errorMsg.setText("");
@@ -72,6 +86,11 @@ public class PhoneViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        //setup Spinner object (min value, max value, default value)
+        SpinnerValueFactory<Integer> memoryValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(16,256,64);
+        memorySpinner.setValueFactory(memoryValueFactory);
+        memorySpinner.setEditable(true);
+        
         //setup the combobox
         brandComboBox.getItems().addAll(Phone.getManufacturers());
         brandComboBox.getSelectionModel().selectFirst();
@@ -93,6 +112,9 @@ public class PhoneViewController implements Initializable {
         blackberryRadioButton.setToggleGroup(osToggleGroup);
         androidRadioButton.setSelected(true);
         
+        //load the default image
+        imageView.setImage(new Image("file:./src/Images/defaultPhone.png"));
+        imageLocation = "./src/Images/defaultPhone.png";
     }
     
     /**
@@ -104,5 +126,51 @@ public class PhoneViewController implements Initializable {
         String label = String.format("%.1f MP", resolutionSlider.getValue());
         resolutionLabel.setText(label);
     }
-    
+ 
+    /**
+     * This method will launch a FileChooser and return the file selected or null
+     */
+    public void getNewImage(ActionEvent event)
+    {
+        //get the stage to open the new window
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        //Instantiate a FileChooser object
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Image");
+        
+        //create filters
+        FileChooser.ExtensionFilter jpgFilter = 
+                   new FileChooser.ExtensionFilter("Image File (*.jpg)","*.jpg");
+        FileChooser.ExtensionFilter pngFilter =
+                    new FileChooser.ExtensionFilter("Image File (*.png)", "*.png");
+        fileChooser.getExtensionFilters().add(jpgFilter);
+        fileChooser.getExtensionFilters().add(pngFilter);
+        
+        //configure the FileChooser to start in the users' home directory
+        String userDirectoryString = System.getProperty("user.home")+"\\Pictures";
+        File userDirectory = new File(userDirectoryString);
+        
+        //check if the userDirectory/pictures exists
+        if (!userDirectory.canRead())
+            userDirectory = new File(System.getProperty("user.home"));
+        
+        //configure the FileChooser to use the starting directory
+        fileChooser.setInitialDirectory(userDirectory);
+  
+        
+        //Open the file dialog window
+        File tmpImageFile = fileChooser.showOpenDialog(stage);
+        
+        //check that we got a file
+        if (tmpImageFile != null)
+        {
+            //update the ImageView with the new image
+            if (tmpImageFile.isFile())
+            {
+                imageView.setImage(new Image("file:"+tmpImageFile.getPath()));
+                imageLocation = tmpImageFile.getPath();
+            }
+        }
+    }
 }

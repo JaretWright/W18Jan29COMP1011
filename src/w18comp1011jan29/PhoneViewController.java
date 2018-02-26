@@ -2,7 +2,10 @@ package w18comp1011jan29;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -71,11 +74,15 @@ public class PhoneViewController implements Initializable {
 
             System.out.println(newPhone.toString());
             errorMsg.setText("");
+            newPhone.insertIntoDB();
         }
         catch (IllegalArgumentException e)
         {
             errorMsg.setText(e.getMessage());
             
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(PhoneViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

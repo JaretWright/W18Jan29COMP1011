@@ -120,7 +120,7 @@ public class Phone {
     /**
      * This method will save the current instance of the phone into the database
      */
-    public void insertIntoDB()
+    public void insertIntoDB() throws SQLException
     {
         Connection conn=null;
         PreparedStatement ps = null;
@@ -153,6 +153,12 @@ public class Phone {
         {
             System.err.println(e);
         }
-        
+        finally
+        {
+            if (conn != null)
+                conn.close();
+            if (ps != null)
+                ps.close();
+        }
     }
 }

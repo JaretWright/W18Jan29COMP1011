@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="w18comp1011jan29.PhoneTableViewController">
+    <stylesheets>
+        <URL value="@phoneview.css" />
+    </stylesheets>
+   <children>
+      <TableView fx:id="tableView" layoutX="27.0" layoutY="51.0" prefHeight="200.0" prefWidth="536.0">
+        <columns>
+          <TableColumn fx:id="makeColumn" prefWidth="125.0" text="Make" />
+          <TableColumn fx:id="modelColumn" prefWidth="125.0" text="Model" />
+            <TableColumn fx:id="osColumn" prefWidth="75.0" text="OS" />
+            <TableColumn fx:id="resolutionColumn" prefWidth="95.0" text="Resolution" />
+            <TableColumn fx:id="memoryColumn" prefWidth="89.0" text="Memory" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

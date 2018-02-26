@@ -1,6 +1,10 @@
 package w18comp1011jan29;
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -111,5 +115,44 @@ public class Phone {
     {
       String[] manufacturers = {"Apple","Samsung","Sony","Nokia","HTC","Blackberry"};
       return Arrays.asList(manufacturers);
+    }
+    
+    /**
+     * This method will save the current instance of the phone into the database
+     */
+    public void insertIntoDB()
+    {
+        Connection conn=null;
+        PreparedStatement ps = null;
+        
+        try
+        {
+            //1. Connect to the database
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"
+                    + "comp1011Assign1", "student", "student");
+            
+            //2. Create a String to hold the SQL statement.  ? will be our
+            //place holders
+            String sql = "INSERT INTO phones VALUES (?,?,?,?,?,?)";
+            
+            //3.  Prepare the query
+            ps = conn.prepareStatement(sql);
+            
+            //4. Bind the parameters
+            ps.setString(1, brand);
+            ps.setString(2, this.model);
+            ps.setString(3, this.os);
+            ps.setString(4, this.imageLocation);
+            ps.setDouble(5, res);
+            ps.setInt(6, memory);
+            
+            //5. execute the sql statement
+            ps.execute();
+        }
+        catch (SQLException e)
+        {
+            System.err.println(e);
+        }
+        
     }
 }

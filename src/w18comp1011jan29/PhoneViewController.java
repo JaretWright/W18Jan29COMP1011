@@ -147,13 +147,10 @@ public class PhoneViewController implements Initializable {
         fileChooser.setTitle("Choose Image");
         
         //create filters
-        FileChooser.ExtensionFilter jpgFilter = 
-                   new FileChooser.ExtensionFilter("Image File (*.jpg)","*.jpg");
-        FileChooser.ExtensionFilter pngFilter =
-                    new FileChooser.ExtensionFilter("Image File (*.png)", "*.png");
-        fileChooser.getExtensionFilters().add(jpgFilter);
-        fileChooser.getExtensionFilters().add(pngFilter);
-        
+        FileChooser.ExtensionFilter imgFilter = 
+                   new FileChooser.ExtensionFilter("Image Files","*.jpg","*.png");
+        fileChooser.getExtensionFilters().add(imgFilter);
+                
         //configure the FileChooser to start in the users' home directory
         String userDirectoryString = System.getProperty("user.home")+"\\Pictures";
         File userDirectory = new File(userDirectoryString);

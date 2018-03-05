@@ -33,4 +33,30 @@ public class SceneChanger
         stage.setScene(scene);
         stage.show();
     }
+    
+    /**
+     * This method will change scenes and allow a Phone object to be passed
+     * between scenes
+     */
+    public static void changeScene(ActionEvent event, String fxmlFileName, String title, 
+                                        PhoneLoadInterface controller, Phone phone) throws IOException
+    {       
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(new Object(){}.getClass().getResource(fxmlFileName));
+        Parent root = loader.load();
+        
+        //access the controller class to preload the phone
+        controller = loader.getController();
+        controller.preloadPhone(phone);
+        
+        Scene scene = new Scene(root);
+        
+        //get the Stage from the event
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        stage.setTitle("Edit Phone");
+        stage.setScene(scene);
+        stage.show();        
+        
+    }
 }

@@ -12,7 +12,7 @@
         <URL value="@phoneview.css" />
     </stylesheets>
    <children>
-      <TableView fx:id="tableView" layoutX="27.0" layoutY="51.0" prefHeight="200.0" prefWidth="536.0">
+      <TableView fx:id="tableView" layoutX="27.0" layoutY="51.0" onMouseClicked="#enableEdit" prefHeight="200.0" prefWidth="536.0">
         <columns>
           <TableColumn fx:id="makeColumn" prefWidth="125.0" text="Make" />
           <TableColumn fx:id="modelColumn" prefWidth="125.0" text="Model" />
@@ -23,7 +23,7 @@
       </TableView>
       <HBox layoutX="298.0" layoutY="332.0" spacing="20.0">
          <children>
-            <Button fx:id="editButton" mnemonicParsing="false" text="Edit Phone" />
+            <Button fx:id="editButton" mnemonicParsing="false" onAction="#editPhoneButtonPushed" text="Edit Phone" />
             <Button mnemonicParsing="false" onAction="#createPhoneButtonPushed" text="Create new phone" />
          </children>
       </HBox>

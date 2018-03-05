@@ -162,24 +162,19 @@ public class PhoneTableViewController implements Initializable
     {
         //Get the selected Phone from the table
         Phone phone = this.tableView.getSelectionModel().getSelectedItem();
-        
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("PhoneView.fxml"));
-        Parent root = loader.load();
-        
-        //access the controller class to preload the phone
-        PhoneViewController controller = loader.getController();
-        controller.preloadPhone(phone);
-        
-        Scene scene = new Scene(root);
-        
-        //get the Stage from the event
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        stage.setTitle("Edit Phone");
-        stage.setScene(scene);
-        stage.show();        
-        
+       
+        SceneChanger.changeScene(event, "PhoneView.fxml", "Edit Phone", 
+                                    new PhoneViewController(), phone);
+    }
+    
+    /**
+     * This method will enable the edit button when a Phone object is
+     * selected
+     */
+    public void enableEdit()
+    {
+        if (tableView.getSelectionModel().getSelectedItem() != null)
+            this.editButton.setDisable(false);
     }
 }
 

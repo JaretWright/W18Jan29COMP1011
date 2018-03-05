@@ -30,7 +30,7 @@ import javafx.stage.Stage;
  *
  * @author JWright
  */
-public class PhoneViewController implements Initializable {
+public class PhoneViewController implements Initializable, PhoneLoadInterface {
 
     @FXML    private ComboBox<String> brandComboBox;
     @FXML    private TextField modelTextField;
@@ -52,10 +52,35 @@ public class PhoneViewController implements Initializable {
      * This method will be used to preload a Phone object in the scene
      * @return 
      */
+    @Override
     public void preloadPhone(Phone newPhone)
     {
         this.phone = newPhone;
         System.out.printf("Phone: '%s' was loaded %n", phone);
+        
+        this.brandComboBox.setValue(phone.getBrand());
+        this.modelTextField.setText(phone.getModel());
+        
+        //this will update the radio button
+        String os = phone.getOs();
+        if (os.equals("iOS"))
+            this.iOSRadioButton.setSelected(true);
+        else if (os.equalsIgnoreCase("Android"))
+            this.androidRadioButton.setSelected(true);
+        else if (os.equalsIgnoreCase("Windows"))
+            this.windowsRadioButton.setSelected(true);
+        else
+            this.blackberryRadioButton.setSelected(true);
+        
+        //update the resolution slider and label
+        this.resolutionSlider.setValue(phone.getRes());
+        this.resolutionLabel.setText(Double.toString(phone.getRes()));
+        
+        this.memorySpinner.getValueFactory().setValue(phone.getMemory());
+        
+        this.imageView.setImage(new Image("file:"+phone.getImageLocation()));
+                
+                
     }
              
     public String getOSFromRadioButtons()

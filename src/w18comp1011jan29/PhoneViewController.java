@@ -1,6 +1,7 @@
 package w18comp1011jan29;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -44,7 +45,19 @@ public class PhoneViewController implements Initializable {
     @FXML    private ImageView imageView;
              private ToggleGroup osToggleGroup;
              private String imageLocation;
+             private Phone phone;
     
+             
+    /**
+     * This method will be used to preload a Phone object in the scene
+     * @return 
+     */
+    public void preloadPhone(Phone newPhone)
+    {
+        this.phone = newPhone;
+        System.out.printf("Phone: '%s' was loaded %n", phone);
+    }
+             
     public String getOSFromRadioButtons()
     {
         if (osToggleGroup.getSelectedToggle().equals(iOSRadioButton))
@@ -176,5 +189,13 @@ public class PhoneViewController implements Initializable {
                 imageLocation = tmpImageFile.getPath();
             }
         }
+    }
+    
+    /**
+     * This will take the user back to the table view of all phones
+     */
+    public void changeToTableView(ActionEvent event) throws IOException
+    {
+        SceneChanger.changeScene(event, "PhoneTableView.fxml", "List of Phones");
     }
 }

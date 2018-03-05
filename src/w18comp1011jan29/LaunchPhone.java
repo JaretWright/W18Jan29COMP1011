@@ -16,7 +16,7 @@ public class LaunchPhone extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("PhoneView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("PhoneTableView.fxml"));
         
         Scene scene = new Scene(root);
        

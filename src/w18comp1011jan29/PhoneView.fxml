@@ -90,8 +90,9 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="103.0" prefWidth="560.0">
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="103.0" prefWidth="560.0" spacing="20.0">
                <children>
+                  <Button mnemonicParsing="false" onAction="#changeToTableView" text="Back to TableView" />
                   <Button mnemonicParsing="false" onAction="#createPhoneButtonPushed" text="Create Phone" />
                </children>
             </HBox>
